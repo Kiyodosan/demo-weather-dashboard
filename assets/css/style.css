@@ -7,52 +7,195 @@
 
 body {
   background: #201e1e;
+  color: #fff;
   display: flex;
   flex-wrap: wrap;
 }
 
-#title {
+/* Header */
+.title-CSS {
   outline: purple 2px solid; 
-  flex: 1 0 auto;
-  height: 10vh;
+  padding: 1rem;
+  min-height: 4rem;
   width: 100vw;
   text-align: center;
-  font-size: 4rem;
 }
 
-#searchBar {
-  outline: skyblue 2px solid;
-  width: 100vw;
-  /* justify-content: center; */
+.title-CSS > h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+/* Search Bar */
+.searchbar-CSS {
+  /* outline: skyblue 2px solid; */
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+  justify-content: center;
+  align-content: center;
+}
+
+#inputField {
+  border: 0;
+  outline: 0;
+  flex: 1;
+  height: 30px;
+  padding: 10px 25px;
+  margin-right: 0.5rem;
+  font-size: 15px;
+  background-color: rgb(194, 186, 186);
   text-align: center;
+  cursor: pointer;
+}
+
+#searchBtn {
+  border: 0;
+  outline: 0;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }
 
 #searchBtn > img {
-  height: 10px;
-  width: 10px;
+  padding-top: 3px;
+  width: 20px;
 }
 
+.field-hover:hover {
+  border: 2px solid skyblue;
+  box-shadow: 0 0 5px 2px #48abe0;
+}
+
+/* Sidebar */
 .sidebar {
   outline: green 2px solid;
   width: 25vw;
-/*   justify-content: center; */
   text-align: center;
+  padding: 0 1rem;
 }
 
 .sidebar > h4 {
-  font-size: 24px;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 0.5rem 0;
 }
 
+.sidebar > button {
+  width: 80%;
+  padding: 40px 35px;
+  border: 1px solid #fff;
+  color: #fff;
+  background-color: rgb(173, 65, 173);
+}
+
+/* Main Container */
 .container {
   width: 75vw;
 }
 
 #cityDisplay {
-  outline: blue 2px solid;
-  padding-left: 1rem;
+  /* outline: blue 2px solid; */
+  padding-left: 2rem;
+}
+
+#cityDisplay > h2 {
+  font-size: 30px;
+  font-weight: 700;
+  padding: 0.5rem 0;
 }
 
 #forecastDisplay {
-  outline: yellow 2px solid;
-  padding-left: 1rem;
+  /* outline: yellow 2px solid; */
+  padding-left: 2rem;
+}
+
+#forecastDisplay > h3 {
+  flex: 1 1 auto;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 0.5rem 0;
+}
+
+/* Card container */
+.weather-card {
+  outline: 2px solid white;
+  width: 90%;
+  /*/////////////// Might need to fix font/imgs for max size*/ 
+/*   max-width: 200px;
+  max-height: 300px; */
+  background: linear-gradient(135deg, #00feba, #5b548a);
+  color: #fff;
+  margin: 15px auto 0;
+  border-radius: 20px;
+  padding: 40px 35px;
+  text-align: center;
+}
+
+.weather > h2 {
+  /* font-size: 80px; */
+  font-size: 12vw;
+  font-weight: 500;
+  color: #201e1e;
+}
+
+.weather > h3 {
+  margin-top: 8px;
+  font-size: 8vw;
+  color: #fff;
+}
+
+.weather > p {
+  /* font-size: 45px; */
+  font-size: 10vw;
+  font-weight: 400;
+  margin-top: -10px;
+}
+
+.weather-icon {
+  width: 170px;
+  width: 50%;
+  margin-top: 30px;
+}
+
+.weather-details {
+  /* outline: 2px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-top: 50px;
+  gap: 1rem;
+}
+
+.details-col {
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.details-col > img {
+  /* width: 40px; */
+  width: 8vw;
+  margin-right: 10px;
+}
+
+.details-col > div {
+  font-size: 4vw;
+}
+
+.humidity, .wind {
+  /* font-size: 28px; */
+  font-size: 5vw;
+  margin-top: -6px;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+  }
+
+  .container {
+    width: 100%;
+  }
 }

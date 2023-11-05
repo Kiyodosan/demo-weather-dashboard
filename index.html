@@ -10,17 +10,19 @@
 </head>
 
 <body>
-  <header id="title">Weather Dashboard</header>
+  <header id="title" class="title-CSS">
+    <h1>Weather Dashboard</h1>
+  </header>
 
-  <section id="searchBar">
-    <input id="inputField" type="text" placeholder="Insert a city name">
-    <button id="searchBtn">
-      <img src="assets/images/1024px-Search_Icon.svg.png" alt="search icon">
+  <section id="searchBar" class="searchbar-CSS">
+    <input id="inputField" type="text" placeholder="Insert a city name" class="field-hover">
+    <button id="searchBtn" class="field-hover">
+      <img src="assets/images/search.png" alt="search icon">
     </button>
   </section>
 
   <aside id="sidebarPanel" class="sidebar">
-    <h4>Recent Searches</h4>
+    <h4>Recent</h4>
     <!-- Add buttons to this as recent searches to bring up previously searched weather data. Limit to 10 most recent searches -->
   </aside>
 
@@ -35,6 +37,32 @@
     </div>
   </section>
 
+  <section style="display: none" class="weather-card">
+    <div class="weather">
+      <h2 class="city">Los Angeles</h2>
+      <h3 class="date">Sunday, Jan 1 2020</h3>
+      <img src="./assets/images/clouds.png" alt="weather icon" class="weather-icon">
+      <p class="temp">72° F</p>
+      <div class="weather-details">
+        <div class="details-col">
+          <img src="./assets/images/humidity.png" alt="humidity icon">
+          <div>
+            <p class="humidity">44 %</p>
+            <p>Humidity</p>
+          </div>
+        </div>
+        <div class="details-col">
+          <img src="./assets/images/wind.png" alt="wind icon">
+          <div>
+            <p class="wind">18 mph</p>
+            <p>Wind Speed</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.10/dayjs.min.js"></script>
   <script src="./assets/js/script.js"></script>
 </body>
 </html>
