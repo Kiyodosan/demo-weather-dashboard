@@ -30,62 +30,37 @@ function getCity() {
     cityPlus = cityName.toLowerCase().replace(" ", "+");
     console.log(cityPlus);  /////////////////// Test
 
-    removeCards();
-
     // Add recent location button to sidebar using cityName
 
+    removeCards();
+
     reqUrl = reqUrlPt1 + cityPlus + reqUrlPt2;
-
-    let weatherData = weatherGet(reqUrl + dateUrlPt1 + dateUrlPt2);
-
-    if (idIndex === 0) {
-      genCard(cityId);
-      setData(weatherData, 0);
-    }
-
-    let nextDate = dateUrlPt2;
-
-    for (let i = 1; i < 6; i++) {
-      nextDate = nextDate.add(1, "days");
-      weatherData = weatherGet(reqUrl + dateUrlPt1 + nextDate);
-      genCard(forecastId);
-      setData(weatherData, i);
-    }
+    getWeather(reqUrl + dateUrlPt1 + dateUrlPt2);
   });
 }
 
-/* function removeCards() {
-  if (cityId.childElementCount >= 2) {
-    cityId.removeChild(cityId.lastChild);
-    idIndex--;
-  }
-
-  let forecastCardCt = forecastId.childElementCount;
-  if (forecastCardCt >= 6) {
-    for (let i = 1; i < forecastCardCt; i++) {
-      forecastId.removeChild(forecastId.lastChild);
-      idIndex--;
-    }
-  }
-} */
-
 // Removes all cards from the main container.
+// Resets idIndex to 0.
 function removeCards() {
-  if (cityId.childElementCount >= 2) {
+  if (cityId.childElementCount > 1) {
     cityId.innerHTML = "";
     let newH2 = document.createElement("h2");
     newH2.textContent = "Weather Info";
     cityId.appendChild(newH2);
   }
 
-  while (forecastId.childElementCount > 1) {
-    forecastId.removeChild(forecastId.lastChild);
+  if (forecastId.childElementCount > 1) {
+    forecastId.innerHTML = "";
+    let newH3 = document.createElement("h3");
+    newH3.textContent = "5-Day Forecast";
+    forecastId.appendChild(newH3);
   }
 
   idIndex = 0;
 }
 
 // Creates a new weather card with unique IDs.
+// Adds +1 to idIndex.
 function genCard(display) {
   let secWeatherCard = document.createElement("section");
   secWeatherCard.classList.add("weather-card");
@@ -189,28 +164,25 @@ function firstLetterCap(sentence) {
 }
 
 /* // Fetches weather data from the API and generates weather cards based on the info.
-function weatherGet(link) {
+function getWeather(link) {
   fetch(link).then(function(response) {
     return response.json();
   }).then(function(data) {
     console.log(data);  /////////////////// Test
 
-    if (idIndex === 0) {
-      genCard(cityId);
-      setData(data, 0);
-    }
+    genCard(cityId);
+    setData(data, 0);
 
-    let nextDate = idIndex;
-    if (nextDate < 10) {
-      nextDate = "0" + idIndex;
-    }
-    /////////////////// Need to set the date differently on these cards.
+    let nextDate = "";
+
     for (let i = 1; i < 6; i++) {
+      nextDate = dateUrlPt2.add(i, "day");
+      weatherData = getWeather(reqUrl + dateUrlPt1 + nextDate);
       genCard(forecastId);
-      setData(data, i);
+      setData(weatherData, i);
     }
 
-    return 1;
+    // return data;  // Maybe don't have to return anything if card is already generated
   }).catch(function(err) {
     console.log(err);
     // Returning 0 to a boolean value for checking success or failure
@@ -219,17 +191,34 @@ function weatherGet(link) {
 } */
 
 // Fetches weather data from the API and generates weather cards based on the info.
-function weatherGet(link) {
-  fetch(link).then(function(response) {
-    return response.json();
-  }).then(function(data) {
+async function getWeather(link) {
+  try{
+    let response = await fetch(link);
+    let data = await response.json();
     console.log(data);  /////////////////// Test
-    return data;
-  }).catch(function(err) {
+
+    genCard(cityId);
+    setData(data, 0);
+
+    let nextDate = "";
+    let nextResponse = "";
+    let nextData = "";
+
+    for (let i = 1; i < 6; i++) {
+      nextDate = dateUrlPt2.add(i, "day");
+
+
+      /////////////////// Modify this section to use nextDate, nextResponse, and nextData for new fetch requests
+      nextResponse = await getWeather(reqUrl + dateUrlPt1 + nextDate);
+      genCard(forecastId);
+      setData(nextResponse, i);
+
+
+    }
+
+  } catch (err) {
     console.log(err);
-    // Returning 0 to a boolean value for checking success or failure
-    return 0;
-  });
+  }
 }
 
 // Adds weather data to a weather card.
@@ -243,11 +232,11 @@ function setData (weather, index) {
 
   cityClass.textContent = cityName;
 
-  let switchIcon = weather.weather[0].main; /////////////////// Need to find way to traverse object
+  let switchIcon = weather.weather[0].main;
   let weatherIconId = document.querySelector("#weatherIcon" + index);
 
   // Changes weather icon based on weather
-  switch (switchIcon) {  /////////////////// Issue targeting weather main (weather description)
+  switch (switchIcon) {
     case "Clear":
       weatherIconId.setAttribute("src", "./assets/images/clear.png");
       break;
@@ -269,7 +258,8 @@ function setData (weather, index) {
   }
 
   let tempId = document.querySelector("#temp" + index);
-  tempId.textContent = weather.main.temp + " °F";
+  console.log("Temp ID: " + tempId);  /////////////////// Test
+  tempId.textContent = weather.main.temp.toFixed(0) + " °F";
 
   let humidityId = document.querySelector("#humidity" + index);
   humidityId.textContent = weather.main.humidity + " %";
