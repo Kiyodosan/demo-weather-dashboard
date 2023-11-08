@@ -8,13 +8,14 @@
 body {
   background: #201e1e;
   color: #fff;
+  font-weight: 700;
   display: flex;
   flex-wrap: wrap;
 }
 
 /* Header */
 .title-CSS {
-  outline: purple 2px solid; 
+  /* outline: purple 2px solid;  */
   padding: 1rem;
   min-height: 4rem;
   width: 100vw;
@@ -28,7 +29,7 @@ body {
 
 /* Search Bar */
 .searchbar-CSS {
-  /* outline: skyblue 2px solid; */
+  border: skyblue 2px solid;
   display: flex;
   width: 100%;
   padding: 1rem;
@@ -39,7 +40,7 @@ body {
 #inputField {
   border: 0;
   outline: 0;
-  flex: 1;
+  /* flex: 1; */
   height: 30px;
   padding: 10px 25px;
   margin-right: 0.5rem;
@@ -69,38 +70,54 @@ body {
 
 /* Sidebar */
 .sidebar {
-  outline: green 2px solid;
-  width: 25vw;
+  border: green 2px solid;
+  width: 20vw;
+  max-height: 360px;
+  margin-top: 1rem;
   text-align: center;
   padding: 0 1rem;
 }
 
 .sidebar > h4 {
-  font-size: 18px;
+  font-size: 25px;
   font-weight: 600;
-  padding: 0.5rem 0;
+  padding: 1rem 0;
 }
 
 .sidebar > button {
-  width: 80%;
-  padding: 40px 35px;
+  display: flex;
+  height: 2rem;
+  width: 90%;
+  max-width: 15rem;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
+  padding: 20px 15px;
   border: 1px solid #fff;
+  border-radius: 20px;
   color: #fff;
   background-color: rgb(173, 65, 173);
 }
 
 /* Main Container */
 .container {
-  width: 75vw;
+  width: 70vw;
+}
+
+.city {
+  object-fit: contain;
 }
 
 #cityDisplay {
   /* outline: blue 2px solid; */
+  margin-top: 0.5rem;
   padding-left: 2rem;
 }
 
 #cityDisplay > h2 {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 700;
   padding: 0.5rem 0;
 }
@@ -112,49 +129,56 @@ body {
 
 #forecastDisplay > h3 {
   flex: 1 1 auto;
-  font-size: 20px;
+  font-size: 35px;
   font-weight: 600;
+  margin-top: 0.5rem;
   padding: 0.5rem 0;
 }
+
+/* Card Styling Reference */
+/* https://www.youtube.com/watch?v=MIYQR-Ybrn4 */
 
 /* Card container */
 .weather-card {
   outline: 2px solid white;
   width: 90%;
-  /*/////////////// Might need to fix font/imgs for max size*/ 
-/*   max-width: 200px;
-  max-height: 300px; */
-  background: linear-gradient(135deg, #00feba, #5b548a);
+  min-width: 300px;
+  max-width: 600px;
+  background: linear-gradient(160deg, #91eff6 30%, #ffda96);
   color: #fff;
-  margin: 15px auto 0;
+  margin: 1rem auto 0;
   border-radius: 20px;
   padding: 40px 35px;
   text-align: center;
 }
 
+.weather {
+  display: flex;
+  flex-direction: column;
+}
+
 .weather > h2 {
-  /* font-size: 80px; */
-  font-size: 12vw;
-  font-weight: 500;
+  font-size: 80px;
+  font-weight: 900;
+  object-fit: contain;
   color: #201e1e;
 }
 
 .weather > h3 {
   margin-top: 8px;
-  font-size: 8vw;
+  font-size: 60px;
   color: #fff;
 }
 
 .weather > p {
-  /* font-size: 45px; */
-  font-size: 10vw;
-  font-weight: 400;
+  font-size: 80px;
   margin-top: -10px;
+  color: #201e1e;
 }
 
 .weather-icon {
-  width: 170px;
   width: 50%;
+  align-self: center;
   margin-top: 30px;
 }
 
@@ -166,6 +190,7 @@ body {
   padding: 0 20px;
   margin-top: 50px;
   gap: 1rem;
+  color: #201e1e;
 }
 
 .details-col {
@@ -175,27 +200,51 @@ body {
 }
 
 .details-col > img {
-  /* width: 40px; */
-  width: 8vw;
+  border-radius: 10%;
+  width: 70px;
   margin-right: 10px;
 }
 
 .details-col > div {
-  font-size: 4vw;
+  font-size: 35px;
 }
 
 .humidity, .wind {
-  /* font-size: 28px; */
-  font-size: 5vw;
+  font-size: 45px;
   margin-top: -6px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 910px) {
   .sidebar {
     width: 100%;
   }
 
   .container {
     width: 100%;
+    margin-right: 1.5rem;
+  }
+
+  .weather > h2 {
+    font-size: 9vw;
+  }
+
+  .weather > h3 {
+    font-size: 7vw;
+  }
+
+  .weather > p {
+    font-size: 9vw;
+  }
+
+  .details-col > img {
+    width: 8vw;
+  }
+
+  .details-col > div {
+    font-size: 4vw;
+  }
+
+  .humidity, .wind {
+    font-size: 5vw;
   }
 }
