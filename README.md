@@ -1,5 +1,5 @@
 
-# UCI-BOOTCAMP-WEEK-6-WEATHER-DASHBOARD
+# Demo Weather Dashboard
 
 ___
 
